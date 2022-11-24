@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-audit_group(){
+audit(){
     groupadd -g 20000 -f Audit
     echo "Audits added Successfuly..."
 }
@@ -18,7 +18,7 @@ user_add(){
         then
 		echo "$u Added to the system"
         else
-        echo "Failed to add user "
+        echo "Failed to add user..."
         fi
 	fi
 }
