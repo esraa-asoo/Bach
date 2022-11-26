@@ -2,8 +2,8 @@
 
 
 change_port(){
-	sed -i "s/#Port 22/Port $u/g" /etc/ssh/sshd_config
-	echo "ssh Port Changed to $u"
+	sed -i "s/#Port 22/Port $1/g" /etc/ssh/sshd_config
+	echo "ssh Port Changed to $1"
 }
 
 disable_root(){
@@ -14,8 +14,8 @@ disable_root(){
 
 firewall_selin(){
 	echo "selinux configuring..."
-	semanage port -a -t ssh_port_t -p tcp $u
-	echo "Allow $u port through Firewall"
-	firewall-cmd --permanent --zone=public --add-port=$u/tcp
+	semanage port -a -t ssh_port_t -p tcp $1
+	echo "Allow $1 port through Firewall"
+	firewall-cmd --permanent --zone=public --add-port=$1/tcp
 	firewall-cmd --reload
 }
