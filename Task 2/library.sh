@@ -13,8 +13,8 @@ then
 change_ssh_pot(){
   echo " Pleas, enter the new ssh port to change: "
   read port
-  sed -i "s/#port 22/port $newport/g" /etc/ssh/sshd_config
-  echo " ssh port changed to $newport "
+  sed -i "s/#port 22/port $port/g" /etc/ssh/sshd_config
+  echo " ssh port changed to $port "
 }
 disable_root_log(){
 sed -i "s/permitRootLogin yes/permitRootLogin no/g" /etc/ssh/sshd_config
