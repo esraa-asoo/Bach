@@ -6,17 +6,17 @@ audit(){
 }
 
 user_add(){
-    exist=$(grep "^$u" /etc/passwd)
-	if grep -q "$u" <<< "$exist"
+    exist=$(grep "^$1" /etc/passwd)
+	if grep -q "$1" <<< "$exist"
   then
-		echo "$u exist"
+		echo "$1 exist"
 	else
-        pass=$(perl -e 'print crypt($ARGV[0], "sprint")' $a)
-        useradd -m -p "$pass" "$u" -g Audit 
-		check_add=$(grep "^$u" /etc/passwd)
-        if grep -q "$u" <<< "$check_add"
+        pass=$(perl -e 'print crypt($ARGV[0], "sprint")' $2)
+        useradd -m -p "$pass" "$1" -g Audit 
+		check_add=$(grep "^$1" /etc/passwd)
+        if grep -q "$1" <<< "$check_add"
         then
-		echo "$u Added to the system"
+		echo "$1 Added to the system"
         else
         echo "Failed to add user..."
         fi
@@ -69,18 +69,18 @@ sync(){
 	f1="~/manager/audit/reports"
 	mkdir -p ~/manager/audit
 	mkdir -p ~/manager/audit/reports
-	echo "00 2 * * 1-4 sync $s $d" > "/tmp/sync.txt"
+	echo "00 2 * * 1-4 sync $f $f1" > "/tmp/sync.txt"
   crontab "/tmp/sync.txt"
 	echo "$USER crontab updated"
 }
 
 menu(){
     echo "PLease Choose An option(press q to exit)"
-    echo "1- Change ssh port to $u"
+    echo "1- Change ssh port to $1"
     echo "2- Disable root Login"
-    echo "3- config Firewall and SELINUX to allow port $u"
+    echo "3- config Firewall and SELINUX to allow port $1"
     echo "4- Add Audit Group"
-    echo "5- Add user($a) and encrypt password($s)"
+    echo "5- Add user($2) and encrypt password($3)"
     echo "6- Create Reports"
     echo "7- System Update"
     echo "8- Enable EPEL Repo"
